@@ -1,5 +1,3 @@
-### The amount of locker is between 0 and 19.
-
 ## 存包
 - Given there has still an available locker, When pressing the 'open' button, Then a ticket can be returned.
 
