@@ -19,8 +19,10 @@ class LockerSystem {
   }
 
   public int scanTicket(int lockerCount, Set<String> ticketQueue, String ticketNumber) {
-    lockerCount = lockerCount + 1;
-    ticketQueue.remove(ticketNumber);
+    if(ticketQueue.contains(ticketNumber)){
+      lockerCount = lockerCount + 1;
+      ticketQueue.remove(ticketNumber);
+    }
     return lockerCount;
   }
 }
