@@ -5,13 +5,16 @@ import java.util.Set;
 
 class LockerSystem {
   public int pressOpenButton(int lockerCount, Set<String> ticketQueue) {
-    lockerCount = lockerCount - 1;
-    Random random = new Random();
-    String ticket = Integer.toString(random.nextInt());
-    while (ticketQueue.contains(ticket)) {
-      ticket = Integer.toString(random.nextInt());
+    if(lockerCount > 0){
+      lockerCount = lockerCount - 1;
+      Random random = new Random();
+      String ticket = Integer.toString(random.nextInt());
+      while (ticketQueue.contains(ticket)) {
+        ticket = Integer.toString(random.nextInt());
+      }
+      ticketQueue.add(ticket);
     }
-    ticketQueue.add(ticket);
+
     return lockerCount;
   }
 }
