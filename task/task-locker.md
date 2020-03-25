@@ -14,4 +14,10 @@
 ## 取包
 - Given a ticket has not been used, When scanning the ticket, Then the locker can be released.
 
+>
+1. Given 17 available lockers, 2 tickets, When scanning the ticket, Then 18 available lockers, 1 tickets.
+
 - Given a ticket has been used already, When scanning the ticket, Then the locker cannot be released.
+
+>
+1. Given 17 available lockers, 2 tickets, When scanning the ticket,, Then 17 available lockers, 2 tickets.
