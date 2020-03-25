@@ -17,4 +17,8 @@ class LockerSystem {
 
     return lockerCount;
   }
+
+public int scanTicket(int originLockerCount, Set<String> ticketQueue, String ticketNumber) {
+	return 0;
+}
 }

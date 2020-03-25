@@ -60,4 +60,21 @@ class LockerTest {
     assertEquals(19, ticketQueue.size());
   }
 
+  @Test
+  void  should_release_locker_when_scan_ticket_given_ticket_not_used(){
+    // Given
+    int originLockerCount = 17;
+    Set<String> ticketQueue = new HashSet<>();
+    ticketQueue.add("001");
+    ticketQueue.add("002");
+
+    // When
+    LockerSystem lockerSystem = new LockerSystem();
+    int currentLockerCount = lockerSystem.scanTicket(originLockerCount, ticketQueue, "001");
+
+    // Then
+    assertEquals((originLockerCount + 1), currentLockerCount);
+    assertEquals(1, ticketQueue.size());
+  }
+
 }
