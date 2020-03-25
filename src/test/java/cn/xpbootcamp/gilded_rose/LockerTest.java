@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class LockerTest {
   @Test
-  void should_return_ticket_when_press_open_given_17_available_locker(){
+  void should_return_ticket_when_press_open_given_17_available_locker() {
     // Given
     int originLockerCount = 17;
     Set<String> ticketQueue = new HashSet<>();
@@ -24,7 +24,6 @@ class LockerTest {
     assertEquals((originLockerCount - 1), currentLockerCount);
     assertEquals(3, ticketQueue.size());
   }
-
 
   @Test
   void should_not_return_ticket_when_press_open_given_0_available_locker() {
@@ -61,7 +60,7 @@ class LockerTest {
   }
 
   @Test
-  void  should_release_locker_when_scan_ticket_given_ticket_not_used(){
+  void should_release_locker_when_scan_ticket_given_ticket_not_used() {
     // Given
     int originLockerCount = 17;
     Set<String> ticketQueue = new HashSet<>();

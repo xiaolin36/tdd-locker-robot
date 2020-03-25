@@ -5,7 +5,7 @@ import java.util.Set;
 
 class LockerSystem {
   public int pressOpenButton(int lockerCount, Set<String> ticketQueue) {
-    if(lockerCount > 0){
+    if (lockerCount > 0) {
       lockerCount = lockerCount - 1;
       Random random = new Random();
       String ticket = Integer.toString(random.nextInt());
@@ -18,7 +18,9 @@ class LockerSystem {
     return lockerCount;
   }
 
-public int scanTicket(int originLockerCount, Set<String> ticketQueue, String ticketNumber) {
-	return 0;
-}
+  public int scanTicket(int lockerCount, Set<String> ticketQueue, String ticketNumber) {
+    lockerCount = lockerCount + 1;
+    ticketQueue.remove(ticketNumber);
+    return lockerCount;
+  }
 }
