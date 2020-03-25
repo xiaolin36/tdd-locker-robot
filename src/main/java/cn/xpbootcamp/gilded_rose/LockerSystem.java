@@ -8,7 +8,7 @@ class LockerSystem {
     if (lockerCount > 0) {
       lockerCount = lockerCount - 1;
       Random random = new Random();
-      String ticket = Integer.toString(random.nextInt());
+      String ticket = "0000000000";
       while (ticketQueue.contains(ticket)) {
         ticket = Integer.toString(random.nextInt());
       }
@@ -19,7 +19,7 @@ class LockerSystem {
   }
 
   public int scanTicket(int lockerCount, Set<String> ticketQueue, String ticketNumber) {
-    if(ticketQueue.contains(ticketNumber)){
+    if (ticketQueue.contains(ticketNumber)) {
       lockerCount = lockerCount + 1;
       ticketQueue.remove(ticketNumber);
     }
