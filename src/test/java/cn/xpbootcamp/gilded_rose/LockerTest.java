@@ -35,4 +35,22 @@ class LockerTest {
     assertEquals("柜子已满", noAvailableSpaceException.getMessage());
   }
 
+  // Given 2 available space, 1 valid ticket link to a bag deposited, When claim
+  // the bag, Then the deposited bag can be obtained.
+  @Test
+  void should_obtain_the_deposited_bag_when_claim_bag_given_2_available_space_1_valid_ticket() {
+    // Given
+    String bagId = "002";
+    Ticket ticket = new Ticket(bagId);
+    int availableSpaces = 2;
+    LockerSystem lockerSystem = new LockerSystem(availableSpaces);
+
+    // When
+    Bag bag = lockerSystem.claimBag(ticket);
+
+    // Then
+    assertNotNull(bag);
+    assertEquals(bag.getId(), ticket.getBagId());
+  }
+
 }
