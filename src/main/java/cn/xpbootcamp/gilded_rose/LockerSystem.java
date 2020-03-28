@@ -22,8 +22,12 @@ class LockerSystem {
   }
 
   public Bag claimBag(Ticket ticket) {
-    Bag bag = new Bag(ticket.getBagId());
-    return bag;
+    if (this.validTickets.containsKey(ticket.getBagId())) {
+      Bag bag = new Bag(ticket.getBagId());
+      return bag;
+    } else {
+      throw new InvalidTicketException("票无效");
+    }
   }
 
   public void setValidTickets(Map<String, Ticket> validTickets) {
