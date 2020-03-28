@@ -13,7 +13,7 @@
 - Given a ticket is valid, When claim the bag, Then obtained the bag succeed.
 
 >
-1. Given 2 available space, 1 valid ticket link to a bag depositted, When claim the bag, Then the depositted bag can be obtained.
+1. Given 2 available space, 1 valid ticket link to a bag deposited, When claim the bag, Then the deposited bag can be obtained.
 
 - Given a ticket is invalid, When claim the bag, Then obtained the bag failed.
 
