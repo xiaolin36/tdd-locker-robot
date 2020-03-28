@@ -59,4 +59,21 @@ class LockerTest {
     assertEquals(bag.getId(), ticket.getBagId());
   }
 
+  // Given 17 available spaces, 1 invalid tickets, When claim the bag, Then
+  // obtained the bag failed and "票无效".
+  @Test
+  void should_obtain_error_message_when_claim_bag_given_17_available_space_1_invalid_ticket() {
+    // Given
+    int availableSpaces = 17;
+    LockerSystem lockerSystem = new LockerSystem(availableSpaces);
+    String bagId = "0022";
+    Ticket ticket = new Ticket(bagId);
+
+    // Then
+    Throwable invalidTicketException = assertThrows(InvalidTicketException.class, () -> {
+      lockerSystem.claimBag(ticket);
+    });
+    assertEquals("票无效", invalidTicketException.getMessage());
+  }
+
 }
