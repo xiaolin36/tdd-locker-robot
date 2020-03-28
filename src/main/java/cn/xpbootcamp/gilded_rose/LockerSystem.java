@@ -17,7 +17,7 @@ class LockerSystem {
   }
 
   public Bag claimBag(Ticket ticket) {
-    Bag bag = new Bag();
+    Bag bag = new Bag(ticket.getBagId());
     return bag;
   }
 
