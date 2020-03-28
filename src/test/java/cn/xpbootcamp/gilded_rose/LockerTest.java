@@ -2,6 +2,9 @@ package cn.xpbootcamp.gilded_rose;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LockerTest {
@@ -43,7 +46,10 @@ class LockerTest {
     String bagId = "002";
     Ticket ticket = new Ticket(bagId);
     int availableSpaces = 2;
+    Map<String, Ticket> validTickets = new HashMap<>();
+    validTickets.put(bagId, ticket);
     LockerSystem lockerSystem = new LockerSystem(availableSpaces);
+    lockerSystem.setValidTickets(validTickets);
 
     // When
     Bag bag = lockerSystem.claimBag(ticket);
