@@ -6,7 +6,8 @@ class LockerSystem {
   }
 
   public Ticket depositBag(){
-    return null;
+    Ticket ticket = new Ticket();
+    return ticket;
   }
 
 }
