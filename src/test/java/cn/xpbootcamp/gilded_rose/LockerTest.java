@@ -20,4 +20,19 @@ class LockerTest {
     assertNotNull(ticket);
   }
 
+  // Given 0 available spaces, When deposit the bag, Then deposit failed and
+  // obtained "柜子已满".
+  @Test
+  void should_obtain_error_message_when_deposit_bag_given_0_available_spaces() {
+    // Given
+    int availableSpaces = 0;
+    LockerSystem lockerSystem = new LockerSystem(availableSpaces);
+
+    // Then
+    Throwable noAvailableSpaceException = assertThrows(NoAvailableSpaceException.class, () -> {
+      lockerSystem.depositBag();
+    });
+    assertEquals("柜子已满", noAvailableSpaceException.getMessage());
+  }
+
 }
