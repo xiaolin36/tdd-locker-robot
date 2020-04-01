@@ -2,9 +2,11 @@ package cn.xpbootcamp.gilded_rose;
 
 public class Ticket {
   private String bagId;
+  private int lockerIndex;
 
-  public Ticket(String bagId) {
+  public Ticket(String bagId, int lockerIndex) {
     this.bagId = bagId;
+    this.lockerIndex = lockerIndex;
   }
 
   public String getBagId() {
@@ -12,6 +14,6 @@ public class Ticket {
   }
 
   public int getLockerIndex() {
-    return 0;
+    return this.lockerIndex;
   }
 }
