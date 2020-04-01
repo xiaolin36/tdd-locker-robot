@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 
 import java.util.List;
@@ -12,14 +13,13 @@ public class LockerRobot {
   }
 
   public Ticket depositBag() {
-    Ticket ticket = null;
     for (int i = 0; i < lockers.size(); i++) {
       Locker locker = lockers.get(i);
       if (locker.getAvailableSpaces() > 0) {
-        ticket = new Ticket("001", locker.getIndex());
-        break;
+        Ticket ticket = new Ticket("001", locker.getIndex());
+        return ticket;
       }
     }
-    return ticket;
+    throw new NoAvailableSpaceException();
   }
 }
