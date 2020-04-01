@@ -10,4 +10,8 @@ public class Ticket {
   public String getBagId() {
     return this.bagId;
   }
+
+  public int getLockerIndex() {
+    return 0;
+  }
 }
