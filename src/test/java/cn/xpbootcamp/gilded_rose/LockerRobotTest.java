@@ -28,7 +28,7 @@ public class LockerRobotTest {
 
     // Then
     assertNotNull(ticket);
-    assertEquals(ticket.getLockerIndex(), locker1.getIndex());
+    assertEquals(locker1.getIndex(), ticket.getLockerIndex());
   }
 
   // 2. Given locker robot 2 lockers with available spaces only in locker No.1, When deposit the bag, Then deposit succeed and obtained 1 ticket belongs to locker No.1
@@ -47,7 +47,26 @@ public class LockerRobotTest {
 
     // Then
     assertNotNull(ticket);
-    assertEquals(ticket.getLockerIndex(), locker1.getIndex());
+    assertEquals(locker1.getIndex(), ticket.getLockerIndex());
+  }
+
+  // 3. Given locker robot 2 lockers with available spaces only in locker No.2, When deposit the bag, Then deposit succeed and obtained 1 ticket belongs to locker No.2.
+  @Test
+  void should_obtain_ticket_from_No2_locker_when_deposit_bag_given_2_lockers_only_No2_with_available_spaces() {
+    // Given
+    Locker locker1 = new Locker(0, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    LockerRobot lockerRobot = new LockerRobot(lockers);
+
+    // When
+    Ticket ticket = lockerRobot.depositBag();
+
+    // Then
+    assertNotNull(ticket);
+    assertEquals(locker2.getIndex(), ticket.getLockerIndex());
   }
 
 }
