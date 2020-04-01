@@ -29,6 +29,7 @@ public class LockerRobot {
   }
 
   public Bag claimBag(Ticket ticket) {
-    return null;
+    Bag bag = new Bag(ticket.getBagId());
+    return bag;
   }
 }
