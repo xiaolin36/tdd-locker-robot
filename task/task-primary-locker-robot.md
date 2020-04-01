@@ -18,10 +18,10 @@
 - Given a ticket is valid, When claim the bag, Then obtained the bag succeed.
 
 >
-1. Given 2 available space, 1 valid ticket link to a bag deposited, When claim the bag, Then the deposited bag can be obtained.
+1. Given 2 lockers both with available space, 1 valid ticket link to a bag deposited, When claim the bag, Then the deposited bag can be obtained.
 
 ### no changes here
 - Given a ticket is invalid, When claim the bag, Then obtained the bag failed.
 
 >
-1. Given 17 available spaces, 1 invalid tickets, When claim the bag, Then obtained the bag failed and "票无效".
+1. Given 2 lockers both with available spaces, 1 invalid tickets, When claim the bag, Then obtained the bag failed and "票无效".

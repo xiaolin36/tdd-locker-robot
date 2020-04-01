@@ -2,7 +2,9 @@ package cn.xpbootcamp.gilded_rose;
 
 import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
 import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
+import cn.xpbootcamp.gilded_rose.model.Bag;
 import cn.xpbootcamp.gilded_rose.model.Locker;
+import cn.xpbootcamp.gilded_rose.model.Ticket;
 
 import java.util.HashMap;
 import java.util.List;
