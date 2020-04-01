@@ -1,13 +1,13 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LockerRobotTest {
 
@@ -67,6 +67,23 @@ public class LockerRobotTest {
     // Then
     assertNotNull(ticket);
     assertEquals(locker2.getIndex(), ticket.getLockerIndex());
+  }
+
+  // 1. Given 2 lockers with 0 available spaces, When deposit the bag, Then deposit failed and obtained "柜子已满".
+  @Test
+  void should_obtain_error_message_when_deposit_bag_given_2_lockers_both_without_available_spaces() {
+    // Given
+    Locker locker1 = new Locker(0, 1);
+    Locker locker2 = new Locker(0, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    LockerRobot lockerRobot = new LockerRobot(lockers);
+
+    // Then
+    assertThrows(NoAvailableSpaceException.class, () -> {
+      lockerRobot.depositBag();
+    });
   }
 
 }
