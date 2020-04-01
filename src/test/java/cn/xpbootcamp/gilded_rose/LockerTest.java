@@ -1,5 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
+import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -32,10 +34,9 @@ class LockerTest {
     LockerSystem lockerSystem = new LockerSystem(availableSpaces);
 
     // Then
-    Throwable noAvailableSpaceException = assertThrows(NoAvailableSpaceException.class, () -> {
+    assertThrows(NoAvailableSpaceException.class, () -> {
       lockerSystem.depositBag();
     });
-    assertEquals("柜子已满", noAvailableSpaceException.getMessage());
   }
 
   // Given 2 available space, 1 valid ticket link to a bag deposited, When claim
@@ -70,10 +71,9 @@ class LockerTest {
     Ticket ticket = new Ticket(bagId);
 
     // Then
-    Throwable invalidTicketException = assertThrows(InvalidTicketException.class, () -> {
+    assertThrows(InvalidTicketException.class, () -> {
       lockerSystem.claimBag(ticket);
     });
-    assertEquals("票无效", invalidTicketException.getMessage());
   }
 
 }

@@ -1,5 +1,8 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
+import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +20,7 @@ class LockerSystem {
       this.validTickets.put(ticket.getBagId(), ticket);
       return ticket;
     } else {
-      throw new NoAvailableSpaceException("柜子已满");
+      throw new NoAvailableSpaceException();
     }
   }
 
@@ -26,7 +29,7 @@ class LockerSystem {
       Bag bag = new Bag(ticket.getBagId());
       return bag;
     } else {
-      throw new InvalidTicketException("票无效");
+      throw new InvalidTicketException();
     }
   }
 
