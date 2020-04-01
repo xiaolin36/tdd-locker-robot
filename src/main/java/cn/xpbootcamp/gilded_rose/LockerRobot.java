@@ -12,6 +12,14 @@ public class LockerRobot {
   }
 
   public Ticket depositBag() {
-    return new Ticket("001", lockers.get(0).getIndex());
+    Ticket ticket = null;
+    for (int i = 0; i < lockers.size(); i++) {
+      Locker locker = lockers.get(i);
+      if (locker.getAvailableSpaces() > 0) {
+        ticket = new Ticket("001", locker.getIndex());
+        break;
+      }
+    }
+    return ticket;
   }
 }

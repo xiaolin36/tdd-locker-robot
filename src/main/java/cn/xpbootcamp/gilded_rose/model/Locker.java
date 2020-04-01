@@ -13,4 +13,8 @@ public class Locker {
   public int getIndex() {
     return this.index;
   }
+
+  public int getAvailableSpaces() {
+    return availableSpaces;
+  }
 }
