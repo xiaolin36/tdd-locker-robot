@@ -1,20 +1,23 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
 import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LockerRobot {
   private List<Locker> lockers;
+  private Map<String, Ticket> validTickets = new HashMap<>();
 
   public LockerRobot(List<Locker> lockers) {
     this.lockers = lockers;
   }
 
   public void setValidTickets(Map<String, Ticket> validTickets) {
-
+    this.validTickets = validTickets;
   }
 
   public Ticket depositBag() {
@@ -29,7 +32,11 @@ public class LockerRobot {
   }
 
   public Bag claimBag(Ticket ticket) {
-    Bag bag = new Bag(ticket.getBagId());
-    return bag;
+    if (this.validTickets.containsKey(ticket.getBagId())) {
+      Bag bag = new Bag(ticket.getBagId());
+      return bag;
+    } else {
+      throw new InvalidTicketException();
+    }
   }
 }
