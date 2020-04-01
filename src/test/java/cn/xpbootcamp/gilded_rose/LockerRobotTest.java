@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
 import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 import org.junit.jupiter.api.Test;
@@ -112,6 +113,27 @@ public class LockerRobotTest {
     // Then
     assertNotNull(bag);
     assertEquals(bag.getId(), ticket.getBagId());
+  }
+
+  // Given 17 available spaces, 1 invalid tickets, When claim the bag, Then
+  // obtained the bag failed and "票无效".
+  @Test
+  void should_obtain_error_message_when_claim_bag_given_2_lockers_both_with_available_space_1_invalid_ticket() {
+    // Given
+    Locker locker1 = new Locker(2, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    LockerRobot lockerRobot = new LockerRobot(lockers);
+
+    String bagId = "0022";
+    Ticket ticket = new Ticket(bagId, -1);
+
+    // Then
+    assertThrows(InvalidTicketException.class, () -> {
+      lockerRobot.claimBag(ticket);
+    });
   }
 
 }
