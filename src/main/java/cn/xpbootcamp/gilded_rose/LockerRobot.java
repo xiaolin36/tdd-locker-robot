@@ -4,12 +4,17 @@ import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 
 import java.util.List;
+import java.util.Map;
 
 public class LockerRobot {
   private List<Locker> lockers;
 
   public LockerRobot(List<Locker> lockers) {
     this.lockers = lockers;
+  }
+
+  public void setValidTickets(Map<String, Ticket> validTickets) {
+
   }
 
   public Ticket depositBag() {
@@ -21,5 +26,9 @@ public class LockerRobot {
       }
     }
     throw new NoAvailableSpaceException();
+  }
+
+  public Bag claimBag(Ticket ticket) {
+    return null;
   }
 }

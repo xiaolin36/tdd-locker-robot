@@ -5,7 +5,9 @@ import cn.xpbootcamp.gilded_rose.model.Locker;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,6 +86,32 @@ public class LockerRobotTest {
     assertThrows(NoAvailableSpaceException.class, () -> {
       lockerRobot.depositBag();
     });
+  }
+
+  // Given 2 available space, 1 valid ticket link to a bag deposited, When claim
+  // the bag, Then the deposited bag can be obtained.
+  @Test
+  void should_obtain_the_deposited_bag_when_claim_bag_given_2_lockers_both_with_available_space_1_valid_ticket() {
+    // Given
+    Locker locker1 = new Locker(2, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    LockerRobot lockerRobot = new LockerRobot(lockers);
+
+    String bagId = "002";
+    Ticket ticket = new Ticket(bagId, 2);
+    Map<String, Ticket> validTickets = new HashMap<>();
+    validTickets.put(bagId, ticket);
+    lockerRobot.setValidTickets(validTickets);
+
+    // When
+    Bag bag = lockerRobot.claimBag(ticket);
+
+    // Then
+    assertNotNull(bag);
+    assertEquals(bag.getId(), ticket.getBagId());
   }
 
 }
