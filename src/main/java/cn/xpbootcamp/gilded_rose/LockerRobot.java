@@ -22,11 +22,11 @@ public class LockerRobot {
     this.validTickets = validTickets;
   }
 
-  public Ticket depositBag() {
+  public Ticket depositBag(Bag bag) {
     for (int i = 0; i < lockers.size(); i++) {
       Locker locker = lockers.get(i);
       if (locker.getAvailableSpaces() > 0) {
-        Ticket ticket = new Ticket("001", locker.getIndex());
+        Ticket ticket = new Ticket(bag.getId(), locker.getIndex());
         return ticket;
       }
     }

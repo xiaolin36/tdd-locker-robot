@@ -28,9 +28,10 @@ public class LockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     LockerRobot lockerRobot = new LockerRobot(lockers);
+    Bag bag = new Bag("001");
 
     // When
-    Ticket ticket = lockerRobot.depositBag();
+    Ticket ticket = lockerRobot.depositBag(bag);
 
     // Then
     assertNotNull(ticket);
@@ -49,9 +50,10 @@ public class LockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     LockerRobot lockerRobot = new LockerRobot(lockers);
+    Bag bag = new Bag("001");
 
     // When
-    Ticket ticket = lockerRobot.depositBag();
+    Ticket ticket = lockerRobot.depositBag(bag);
 
     // Then
     assertNotNull(ticket);
@@ -70,9 +72,10 @@ public class LockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     LockerRobot lockerRobot = new LockerRobot(lockers);
+    Bag bag = new Bag("001");
 
     // When
-    Ticket ticket = lockerRobot.depositBag();
+    Ticket ticket = lockerRobot.depositBag(bag);
 
     // Then
     assertNotNull(ticket);
@@ -90,10 +93,11 @@ public class LockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     LockerRobot lockerRobot = new LockerRobot(lockers);
+    Bag bag = new Bag("001");
 
     // Then
     assertThrows(NoAvailableSpaceException.class, () -> {
-      lockerRobot.depositBag();
+      lockerRobot.depositBag(bag);
     });
   }
 
