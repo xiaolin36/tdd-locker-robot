@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
 import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Bag;
 import cn.xpbootcamp.gilded_rose.model.Locker;
@@ -112,6 +113,28 @@ public class SmartLockerRobotTest {
     // Then
     assertNotNull(depositedBag);
     assertEquals(depositedBag.getId(), ticket.getBagId());
+  }
+
+  //  1. Given locker robot 2 lockers both with available spaces, 1 used tickets, When claim the bag, Then obtained the bag failed and "票无效".
+  @Test
+  void should_obtain_error_message_when_claim_bag_given_2_lockers_and_1_used_ticket() {
+    // Given
+    Locker locker1 = new Locker(2, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
+
+    Bag bag = new Bag("002");
+    Ticket ticket = lockerRobot.depositBag(bag);
+
+    lockerRobot.claimBag(ticket);
+
+    // Then
+    assertThrows(InvalidTicketException.class, () -> {
+      lockerRobot.claimBag(ticket);
+    });
   }
 //
 //  // 1. Given 2 lockers both with available spaces, 1 invalid tickets, When claim the bag, Then obtained the bag failed and "票无效".

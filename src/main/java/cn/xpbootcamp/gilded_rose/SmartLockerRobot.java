@@ -43,6 +43,7 @@ public class SmartLockerRobot {
   public Bag claimBag(Ticket ticket) {
     if (this.validTickets.containsKey(ticket.getBagId())) {
       Bag bag = new Bag(ticket.getBagId());
+      this.validTickets.remove(bag.getId());
       return bag;
     } else {
       throw new InvalidTicketException();
