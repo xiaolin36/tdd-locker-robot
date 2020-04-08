@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LockerRobot {
+public class SmartLockerRobot {
   private List<Locker> lockers;
   private Map<String, Ticket> validTickets = new HashMap<>();
 
-  public LockerRobot(List<Locker> lockers) {
+  public SmartLockerRobot(List<Locker> lockers) {
     this.lockers = lockers;
   }
 
