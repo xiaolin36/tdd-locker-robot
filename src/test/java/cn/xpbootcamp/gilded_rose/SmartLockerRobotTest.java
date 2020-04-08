@@ -91,32 +91,28 @@ public class SmartLockerRobotTest {
     });
   }
 
+  // 1. Given locker robot 2 lockers both with available space, 1 valid ticket link to a bag deposited, When claim the bag, Then the deposited bag can be obtained.
 
-//
-//  // 1. Given 2 lockers both with available space, 1 valid ticket link to a bag deposited, When claim the bag, Then the deposited bag can be obtained.
-//  @Test
-//  void should_obtain_the_deposited_bag_when_claim_bag_given_2_lockers_both_with_available_space_1_valid_ticket() {
-//    // Given
-//    Locker locker1 = new Locker(2, 1);
-//    Locker locker2 = new Locker(2, 2);
-//    List<Locker> lockers = new ArrayList<>();
-//    lockers.add(locker1);
-//    lockers.add(locker2);
-//    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
-//
-//    String bagId = "002";
-//    Ticket ticket = new Ticket(bagId, 2);
-//    Map<String, Ticket> validTickets = new HashMap<>();
-//    validTickets.put(bagId, ticket);
-//    lockerRobot.setValidTickets(validTickets);
-//
-//    // When
-//    Bag bag = lockerRobot.claimBag(ticket);
-//
-//    // Then
-//    assertNotNull(bag);
-//    assertEquals(bag.getId(), ticket.getBagId());
-//  }
+  @Test
+  void should_obtain_the_deposited_bag_when_claim_bag_given_2_lockers_and_1_valid_ticket() {
+    // Given
+    Locker locker1 = new Locker(2, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
+
+    Bag bag = new Bag("002");
+    Ticket ticket = lockerRobot.depositBag(bag);
+
+    // When
+    Bag depositedBag = lockerRobot.claimBag(ticket);
+
+    // Then
+    assertNotNull(depositedBag);
+    assertEquals(depositedBag.getId(), ticket.getBagId());
+  }
 //
 //  // 1. Given 2 lockers both with available spaces, 1 invalid tickets, When claim the bag, Then obtained the bag failed and "票无效".
 //  @Test

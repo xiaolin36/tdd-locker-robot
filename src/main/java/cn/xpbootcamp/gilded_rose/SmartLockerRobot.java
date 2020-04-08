@@ -19,10 +19,6 @@ public class SmartLockerRobot {
     this.lockers = sortLockersByIndex(lockers);
   }
 
-  public void setValidTickets(Map<String, Ticket> validTickets) {
-    this.validTickets = validTickets;
-  }
-
   private List<Locker> sortLockersByIndex(List<Locker> lockers) {
     lockers.sort(Comparator.comparingInt(Locker::getIndex));
     return lockers;
@@ -38,6 +34,7 @@ public class SmartLockerRobot {
     }
     if(lockerWithMaxAvailableSpaces.getAvailableSpaces() > 0){
       Ticket ticket = new Ticket(bag.getId(), lockerWithMaxAvailableSpaces.getIndex());
+      this.validTickets.put(bag.getId(), ticket);
       return ticket;
     }
     throw new NoAvailableSpaceException();
