@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartLockerRobotTest {
 
@@ -53,69 +52,26 @@ public class SmartLockerRobotTest {
       assertEquals(locker2.getIndex(), ticket.getLockerIndex());
     }
 
-//
-//  // 2. Given locker robot 2 lockers with available spaces only in locker No.1,
-//  // When deposit the bag, Then deposit succeed and obtained 1 ticket belongs to
-//  // locker No.1
-//  @Test
-//  void should_obtain_ticket_from_No1_locker_when_deposit_bag_given_2_lockers_only_No1_with_available_spaces() {
-//    // Given
-//    Locker locker1 = new Locker(2, 1);
-//    Locker locker2 = new Locker(0, 2);
-//    List<Locker> lockers = new ArrayList<>();
-//    lockers.add(locker1);
-//    lockers.add(locker2);
-//    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
-//    Bag bag = new Bag("001");
-//
-//    // When
-//    Ticket ticket = lockerRobot.depositBag(bag);
-//
-//    // Then
-//    assertNotNull(ticket);
-//    assertEquals(locker1.getIndex(), ticket.getLockerIndex());
-//  }
-//
-//  // 3. Given locker robot 2 lockers with available spaces only in locker No.2,
-//  // When deposit the bag, Then deposit succeed and obtained 1 ticket belongs to
-//  // locker No.2.
-//  @Test
-//  void should_obtain_ticket_from_No2_locker_when_deposit_bag_given_2_lockers_only_No2_with_available_spaces() {
-//    // Given
-//    Locker locker1 = new Locker(0, 1);
-//    Locker locker2 = new Locker(2, 2);
-//    List<Locker> lockers = new ArrayList<>();
-//    lockers.add(locker1);
-//    lockers.add(locker2);
-//    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
-//    Bag bag = new Bag("001");
-//
-//    // When
-//    Ticket ticket = lockerRobot.depositBag(bag);
-//
-//    // Then
-//    assertNotNull(ticket);
-//    assertEquals(locker2.getIndex(), ticket.getLockerIndex());
-//  }
-//
-//  // 1. Given 2 lockers with 0 available spaces, When deposit the bag, Then
-//  // deposit failed and obtained "柜子已满".
-//  @Test
-//  void should_obtain_error_message_when_deposit_bag_given_2_lockers_both_without_available_spaces() {
-//    // Given
-//    Locker locker1 = new Locker(0, 1);
-//    Locker locker2 = new Locker(0, 2);
-//    List<Locker> lockers = new ArrayList<>();
-//    lockers.add(locker1);
-//    lockers.add(locker2);
-//    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
-//    Bag bag = new Bag("001");
-//
-//    // Then
-//    assertThrows(NoAvailableSpaceException.class, () -> {
-//      lockerRobot.depositBag(bag);
-//    });
-//  }
+    // 3. Given locker robot 2 lockers, locker No.1 with 1 available spaces, locker No.2 with 1 available spaces, When deposit the bag, Then deposit succeed and obtained 1 ticket belongs to locker No.1.
+    @Test
+    void should_obtain_ticket_from_No1_locker_when_deposit_bag_given_2_lockers_with_same_available_spaces() {
+      // Given
+      Bag bag = new Bag("001");
+      Locker locker1 = new Locker(2, 2);
+      Locker locker2 = new Locker(2, 1);
+      List<Locker> lockers = new ArrayList<>();
+      lockers.add(locker1);
+      lockers.add(locker2);
+      SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
+
+      // When
+      Ticket ticket = smartLockerRobot.depositBag(bag);
+
+      // Then
+      assertNotNull(ticket);
+      assertEquals(locker2.getIndex(), ticket.getLockerIndex());
+    }
+    
 //
 //  // 1. Given 2 lockers both with available space, 1 valid ticket link to a bag deposited, When claim the bag, Then the deposited bag can be obtained.
 //  @Test

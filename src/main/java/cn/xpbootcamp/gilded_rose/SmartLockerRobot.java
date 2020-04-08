@@ -6,6 +6,7 @@ import cn.xpbootcamp.gilded_rose.model.Bag;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 import cn.xpbootcamp.gilded_rose.model.Ticket;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,16 @@ public class SmartLockerRobot {
   private Map<String, Ticket> validTickets = new HashMap<>();
 
   public SmartLockerRobot(List<Locker> lockers) {
-    this.lockers = lockers;
+    this.lockers = sortLockersByIndex(lockers);
   }
 
   public void setValidTickets(Map<String, Ticket> validTickets) {
     this.validTickets = validTickets;
+  }
+
+  private List<Locker> sortLockersByIndex(List<Locker> lockers) {
+    lockers.sort(Comparator.comparingInt(Locker::getIndex));
+    return lockers;
   }
 
   public Ticket depositBag(Bag bag) {
