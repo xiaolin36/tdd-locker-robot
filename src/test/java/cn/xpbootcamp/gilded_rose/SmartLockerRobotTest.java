@@ -136,25 +136,24 @@ public class SmartLockerRobotTest {
       lockerRobot.claimBag(ticket);
     });
   }
-//
-//  // 1. Given 2 lockers both with available spaces, 1 invalid tickets, When claim the bag, Then obtained the bag failed and "票无效".
-//  @Test
-//  void should_obtain_error_message_when_claim_bag_given_2_lockers_both_with_available_space_1_invalid_ticket() {
-//    // Given
-//    Locker locker1 = new Locker(2, 1);
-//    Locker locker2 = new Locker(2, 2);
-//    List<Locker> lockers = new ArrayList<>();
-//    lockers.add(locker1);
-//    lockers.add(locker2);
-//    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
-//
-//    String bagId = "0022";
-//    Ticket ticket = new Ticket(bagId, -1);
-//
-//    // Then
-//    assertThrows(InvalidTicketException.class, () -> {
-//      lockerRobot.claimBag(ticket);
-//    });
-//  }
+
+  //  2. Given locker robot 2 lockers both with available spaces, 1 not existing tickets, When claim the bag, Then obtained the bag failed and "票无效".
+  @Test
+  void should_obtain_error_message_when_claim_bag_given_2_lockers_and_1_not_existing_ticket() {
+    // Given
+    Locker locker1 = new Locker(2, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
+
+    Ticket ticket = new Ticket("0022", 1);
+
+    // Then
+    assertThrows(InvalidTicketException.class, () -> {
+      lockerRobot.claimBag(ticket);
+    });
+  }
 
 }
