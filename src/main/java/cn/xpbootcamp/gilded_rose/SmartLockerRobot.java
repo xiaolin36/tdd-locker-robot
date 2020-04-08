@@ -36,8 +36,11 @@ public class SmartLockerRobot {
         lockerWithMaxAvailableSpaces = currentLocker;
       }
     }
-    Ticket ticket = new Ticket(bag.getId(), lockerWithMaxAvailableSpaces.getIndex());
-    return ticket;
+    if(lockerWithMaxAvailableSpaces.getAvailableSpaces() > 0){
+      Ticket ticket = new Ticket(bag.getId(), lockerWithMaxAvailableSpaces.getIndex());
+      return ticket;
+    }
+    throw new NoAvailableSpaceException();
   }
 
   public Bag claimBag(Ticket ticket) {
