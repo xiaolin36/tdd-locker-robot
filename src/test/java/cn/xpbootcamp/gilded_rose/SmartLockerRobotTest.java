@@ -83,12 +83,12 @@ public class SmartLockerRobotTest {
     List<Locker> lockers = new ArrayList<>();
     lockers.add(locker1);
     lockers.add(locker2);
-    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
+    SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
     Bag bag = new Bag("001");
 
     // Then
     assertThrows(NoAvailableSpaceException.class, () -> {
-      lockerRobot.depositBag(bag);
+      smartLockerRobot.depositBag(bag);
     });
   }
 
@@ -102,13 +102,13 @@ public class SmartLockerRobotTest {
     List<Locker> lockers = new ArrayList<>();
     lockers.add(locker1);
     lockers.add(locker2);
-    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
+    SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
 
     Bag bag = new Bag("002");
-    Ticket ticket = lockerRobot.depositBag(bag);
+    Ticket ticket = smartLockerRobot.depositBag(bag);
 
     // When
-    Bag depositedBag = lockerRobot.claimBag(ticket);
+    Bag depositedBag = smartLockerRobot.claimBag(ticket);
 
     // Then
     assertNotNull(depositedBag);
@@ -124,16 +124,16 @@ public class SmartLockerRobotTest {
     List<Locker> lockers = new ArrayList<>();
     lockers.add(locker1);
     lockers.add(locker2);
-    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
+    SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
 
     Bag bag = new Bag("002");
-    Ticket ticket = lockerRobot.depositBag(bag);
+    Ticket ticket = smartLockerRobot.depositBag(bag);
 
-    lockerRobot.claimBag(ticket);
+    smartLockerRobot.claimBag(ticket);
 
     // Then
     assertThrows(InvalidTicketException.class, () -> {
-      lockerRobot.claimBag(ticket);
+      smartLockerRobot.claimBag(ticket);
     });
   }
 
@@ -146,13 +146,13 @@ public class SmartLockerRobotTest {
     List<Locker> lockers = new ArrayList<>();
     lockers.add(locker1);
     lockers.add(locker2);
-    SmartLockerRobot lockerRobot = new SmartLockerRobot(lockers);
+    SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
 
     Ticket ticket = new Ticket("0022", 1);
 
     // Then
     assertThrows(InvalidTicketException.class, () -> {
-      lockerRobot.claimBag(ticket);
+      smartLockerRobot.claimBag(ticket);
     });
   }
 
