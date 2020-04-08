@@ -23,14 +23,15 @@ public class SmartLockerRobot {
   }
 
   public Ticket depositBag(Bag bag) {
-    for (int i = 0; i < lockers.size(); i++) {
-      Locker locker = lockers.get(i);
-      if (locker.getAvailableSpaces() > 0) {
-        Ticket ticket = new Ticket(bag.getId(), locker.getIndex());
-        return ticket;
+    Locker lockerWithMaxAvailableSpaces = lockers.get(0);
+    for (int i = 1; i < lockers.size(); i++) {
+      Locker currentLocker = lockers.get(i);
+      if (currentLocker.getAvailableSpaces() > lockerWithMaxAvailableSpaces.getAvailableSpaces()) {
+        lockerWithMaxAvailableSpaces = currentLocker;
       }
     }
-    throw new NoAvailableSpaceException();
+    Ticket ticket = new Ticket(bag.getId(), lockerWithMaxAvailableSpaces.getIndex());
+    return ticket;
   }
 
   public Bag claimBag(Ticket ticket) {
