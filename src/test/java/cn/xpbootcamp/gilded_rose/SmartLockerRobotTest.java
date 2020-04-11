@@ -16,7 +16,7 @@ public class SmartLockerRobotTest {
 
   // 1. Given smart locker robot 2 lockers, locker No.1 with 2 available spaces, locker No.2 with 1 available spaces, When smart locker robot deposit the bag, Then obtained 1 ticket and the bag deposited to locker No.1.
   @Test
-  void should_obtain_ticket_from_No1_locker_when_deposit_bag_given_locker1_has_more_available_spaces() {
+  void should_deposit_bag_to_No1_locker_when_deposit_bag_given_No1_locker_has_more_available_spaces() {
     // Given
     Bag bag = new Bag("001");
     Locker locker1 = new Locker(2, 1);
@@ -36,7 +36,7 @@ public class SmartLockerRobotTest {
 
   // 2. Given smart locker robot 2 lockers, locker No.1 with 1 available spaces, locker No.2 with 2 available spaces, When smart locker robot deposit the bag, Then obtained 1 ticket and the bag deposited to locker No.2.
   @Test
-  void should_obtain_ticket_from_No2_locker_when_deposit_bag_given_locker2_has_more_available_spaces() {
+  void should_deposit_bag_to_No2_locker_when_deposit_bag_given_No2_locker_has_more_available_spaces() {
     // Given
     Bag bag = new Bag("001");
     Locker locker1 = new Locker(1, 1);
@@ -56,7 +56,7 @@ public class SmartLockerRobotTest {
 
   // 3. Given smart locker robot 2 lockers, locker No.1 with 1 available spaces, locker No.2 with 1 available spaces, When smart locker robot deposit the bag, Then obtained 1 ticket and the bag deposited to locker No.1.
   @Test
-  void should_obtain_ticket_from_No1_locker_when_deposit_bag_given_2_lockers_with_same_available_spaces() {
+  void should_deposit_bag_to_No1_locker_when_deposit_bag_given_2_lockers_with_same_available_spaces() {
     // Given
     Bag bag = new Bag("001");
     Locker locker1 = new Locker(2, 2);
@@ -138,7 +138,7 @@ public class SmartLockerRobotTest {
 
   // 2. Given smart locker robot 2 lockers both with available spaces, 1 ticket not created in our system, When smart locker robot claim the bag, Then obtained the bag failed and "票无效".
   @Test
-  void should_obtain_error_message_when_claim_bag_given_2_lockers_and_1_not_existing_ticket() {
+  void should_obtain_error_message_when_claim_bag_given_2_lockers_and_1_ticket_not_created_in_our_system() {
     // Given
     Locker locker1 = new Locker(2, 1);
     Locker locker2 = new Locker(2, 2);
