@@ -65,7 +65,7 @@ class LockerTest {
   void should_obtain_error_message_when_claim_bag_given_17_available_space_1_invalid_ticket() {
     // Given
     Locker locker = new Locker(17, 0);
-    Ticket ticket = new Ticket(1);
+    Ticket ticket = new Ticket("invalid ticket");
 
     // Then
     assertThrows(InvalidTicketException.class, () -> {

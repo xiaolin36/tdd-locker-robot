@@ -8,9 +8,7 @@ import cn.xpbootcamp.gilded_rose.model.Ticket;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -134,7 +132,7 @@ public class PrimaryLockerRobotTest {
     lockers.add(locker2);
     PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
 
-    Ticket ticket = new Ticket(-1);
+    Ticket ticket = new Ticket("invalid ticket");
 
     // Then
     assertThrows(InvalidTicketException.class, () -> {

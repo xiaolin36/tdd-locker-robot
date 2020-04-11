@@ -147,7 +147,7 @@ public class SmartLockerRobotTest {
     lockers.add(locker2);
     SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
 
-    Ticket ticket = new Ticket(1);
+    Ticket ticket = new Ticket("invalid ticket");
 
     // Then
     assertThrows(InvalidTicketException.class, () -> {

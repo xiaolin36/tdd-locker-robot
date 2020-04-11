@@ -30,8 +30,7 @@ public class PrimaryLockerRobot {
   }
 
   private Locker findDepositedLocker() {
-    for (int i = 0; i < this.lockers.size(); i++) {
-      Locker locker = this.lockers.get(i);
+    for (Locker locker : this.lockers) {
       if (locker.getAvailableSpaces() > 0) {
         return locker;
       }
@@ -48,8 +47,7 @@ public class PrimaryLockerRobot {
   }
 
   private Locker findClaimedLocker(Ticket ticket) {
-    for(int i = 0; i < this.lockers.size(); i++) {
-      Locker locker = this.lockers.get(i);
+    for (Locker locker : this.lockers) {
       if (locker.getStoredBags().containsKey(ticket.getId())) {
         return locker;
       }

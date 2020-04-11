@@ -5,6 +5,7 @@ import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Locker {
 
@@ -31,12 +32,13 @@ public class Locker {
 
   public Ticket depositBag(Bag bag) {
     if (this.availableSpaces > 0) {
-      Ticket ticket = new Ticket(0);
+      Random random = new Random();
+      int number = random.nextInt();
+      Ticket ticket = new Ticket(Integer.toString(number));
       this.storedBags.put(ticket.getId(), bag);
       return ticket;
-    } else {
-      throw new NoAvailableSpaceException();
     }
+    throw new NoAvailableSpaceException();
   }
 
   public Bag claimBag(Ticket ticket) {
@@ -44,8 +46,7 @@ public class Locker {
       Bag bag = this.storedBags.get(ticket.getId());
       this.storedBags.remove(ticket.getId());
       return bag;
-    } else {
-      throw new InvalidTicketException();
     }
+    throw new InvalidTicketException();
   }
 }

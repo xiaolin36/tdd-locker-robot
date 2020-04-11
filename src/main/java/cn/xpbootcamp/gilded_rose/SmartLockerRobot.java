@@ -20,9 +20,8 @@ public class SmartLockerRobot {
   }
 
   private Locker findDepositedLocker() {
-    Locker lockerWithMaxAvailableSpaces = lockers.get(0);
-    for (int i = 1; i < lockers.size(); i++) {
-      Locker currentLocker = lockers.get(i);
+    Locker lockerWithMaxAvailableSpaces = this.lockers.get(0);
+    for(Locker currentLocker: this.lockers) {
       if (currentLocker.getAvailableSpaces() > lockerWithMaxAvailableSpaces.getAvailableSpaces()) {
         lockerWithMaxAvailableSpaces = currentLocker;
       }
@@ -44,8 +43,7 @@ public class SmartLockerRobot {
   }
 
   private Locker findClaimedLocker(Ticket ticket) {
-    for(int i = 0; i < this.lockers.size(); i++) {
-      Locker locker = this.lockers.get(i);
+    for(Locker locker: this.lockers) {
       if (locker.getStoredBags().containsKey(ticket.getId())) {
         return locker;
       }
