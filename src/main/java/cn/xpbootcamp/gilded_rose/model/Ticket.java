@@ -1,16 +1,15 @@
 package cn.xpbootcamp.gilded_rose.model;
 
 public class Ticket {
-  private String bagId;
+  private String id;
   private int lockerIndex;
 
-  public Ticket(String bagId, int lockerIndex) {
-    this.bagId = bagId;
-    this.lockerIndex = lockerIndex;
+  public String getId() {
+    return id;
   }
 
-  public String getBagId() {
-    return this.bagId;
+  public Ticket(int lockerIndex) {
+    this.lockerIndex = lockerIndex;
   }
 
   public int getLockerIndex() {

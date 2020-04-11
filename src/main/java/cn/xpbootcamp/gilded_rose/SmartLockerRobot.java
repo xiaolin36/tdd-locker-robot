@@ -1,19 +1,14 @@
 package cn.xpbootcamp.gilded_rose;
 
 import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
-import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Bag;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 import cn.xpbootcamp.gilded_rose.model.Ticket;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SmartLockerRobot {
   private List<Locker> lockers;
-  private Map<String, Ticket> validTickets = new HashMap<>();
 
   public SmartLockerRobot(List<Locker> lockers) {
     this.lockers = sortLockersByIndex(lockers);
@@ -24,7 +19,7 @@ public class SmartLockerRobot {
     return lockers;
   }
 
-  public Ticket depositBag(Bag bag) {
+  private Locker findDepositedLocker() {
     Locker lockerWithMaxAvailableSpaces = lockers.get(0);
     for (int i = 1; i < lockers.size(); i++) {
       Locker currentLocker = lockers.get(i);
@@ -32,21 +27,29 @@ public class SmartLockerRobot {
         lockerWithMaxAvailableSpaces = currentLocker;
       }
     }
-    if(lockerWithMaxAvailableSpaces.getAvailableSpaces() > 0){
-      Ticket ticket = new Ticket(bag.getId(), lockerWithMaxAvailableSpaces.getIndex());
-      this.validTickets.put(bag.getId(), ticket);
-      return ticket;
-    }
-    throw new NoAvailableSpaceException();
+    return lockerWithMaxAvailableSpaces;
+  }
+
+  public Ticket depositBag(Bag bag) {
+    Locker locker = findDepositedLocker();
+    return locker.depositBag(bag);
   }
 
   public Bag claimBag(Ticket ticket) {
-    if (this.validTickets.containsKey(ticket.getBagId())) {
-      Bag bag = new Bag(ticket.getBagId());
-      this.validTickets.remove(bag.getId());
-      return bag;
-    } else {
-      throw new InvalidTicketException();
+    Locker locker = findClaimedLocker(ticket);
+    if (locker != null) {
+      return locker.claimBag(ticket);
     }
+    throw new InvalidTicketException();
+  }
+
+  private Locker findClaimedLocker(Ticket ticket) {
+    for(int i = 0; i < this.lockers.size(); i++) {
+      Locker locker = this.lockers.get(i);
+      if (locker.getStoredBags().containsKey(ticket.getId())) {
+        return locker;
+      }
+    }
+    return null;
   }
 }
