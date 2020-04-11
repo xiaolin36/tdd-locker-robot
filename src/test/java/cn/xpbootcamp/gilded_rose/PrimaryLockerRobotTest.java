@@ -28,14 +28,14 @@ public class PrimaryLockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
-    Bag bag = new Bag("001");
+    Bag bag = new Bag();
 
     // When
     Ticket ticket = primaryLockerRobot.depositBag(bag);
 
     // Then
     assertNotNull(ticket);
-    assertEquals(locker1.getIndex(), ticket.getLockerIndex());
+    assertEquals(bag, locker1.claimBag(ticket));
   }
 
   // 2. Given locker robot 2 lockers with available spaces only in locker No.1,
@@ -50,14 +50,14 @@ public class PrimaryLockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
-    Bag bag = new Bag("001");
+    Bag bag = new Bag();
 
     // When
     Ticket ticket = primaryLockerRobot.depositBag(bag);
 
     // Then
     assertNotNull(ticket);
-    assertEquals(locker1.getIndex(), ticket.getLockerIndex());
+    assertEquals(bag, locker1.claimBag(ticket));
   }
 
   // 3. Given locker robot 2 lockers with available spaces only in locker No.2,
@@ -72,14 +72,14 @@ public class PrimaryLockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
-    Bag bag = new Bag("001");
+    Bag bag = new Bag();
 
     // When
     Ticket ticket = primaryLockerRobot.depositBag(bag);
 
     // Then
     assertNotNull(ticket);
-    assertEquals(locker2.getIndex(), ticket.getLockerIndex());
+    assertEquals(bag, locker2.claimBag(ticket));
   }
 
   // 1. Given 2 lockers with 0 available spaces, When deposit the bag, Then
@@ -93,7 +93,7 @@ public class PrimaryLockerRobotTest {
     lockers.add(locker1);
     lockers.add(locker2);
     PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
-    Bag bag = new Bag("001");
+    Bag bag = new Bag();
 
     // Then
     assertThrows(NoAvailableSpaceException.class, () -> {
@@ -112,18 +112,15 @@ public class PrimaryLockerRobotTest {
     lockers.add(locker2);
     PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
 
-    String bagId = "002";
-    Ticket ticket = new Ticket(bagId, 2);
-    Map<String, Ticket> validTickets = new HashMap<>();
-    validTickets.put(bagId, ticket);
-    primaryLockerRobot.setValidTickets(validTickets);
+    Bag bag = new Bag();
+    Ticket ticket = primaryLockerRobot.depositBag(bag);
 
     // When
-    Bag bag = primaryLockerRobot.claimBag(ticket);
+    Bag depositedBag = primaryLockerRobot.claimBag(ticket);
 
     // Then
-    assertNotNull(bag);
-    assertEquals(bag.getId(), ticket.getBagId());
+    assertNotNull(depositedBag);
+    assertEquals(bag, depositedBag);
   }
 
   // 1. Given 2 lockers both with available spaces, 1 invalid tickets, When claim the bag, Then obtained the bag failed and "票无效".
@@ -137,8 +134,7 @@ public class PrimaryLockerRobotTest {
     lockers.add(locker2);
     PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
 
-    String bagId = "0022";
-    Ticket ticket = new Ticket(bagId, -1);
+    Ticket ticket = new Ticket(-1);
 
     // Then
     assertThrows(InvalidTicketException.class, () -> {
