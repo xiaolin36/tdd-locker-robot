@@ -12,6 +12,7 @@ public class Locker {
   private int availableSpaces;
   private int index;
   private Map<String, Bag> storedBags = new HashMap<>();
+  private int totalSpaces;
 
   public Locker(int availableSpaces, int index) {
     this.availableSpaces = availableSpaces;
@@ -50,6 +51,14 @@ public class Locker {
     throw new InvalidTicketException();
   }
 
-  public void setTotalSpaces(int i) {
+  public void setTotalSpaces(int totalSpaces) {
+    this.totalSpaces = totalSpaces;
+  }
+
+  public double getRatioOfAvailableSpaces(){
+    if(this.totalSpaces > 0){
+      return ((double) this.availableSpaces) / this.totalSpaces;
+    }
+    return 0;
   }
 }
