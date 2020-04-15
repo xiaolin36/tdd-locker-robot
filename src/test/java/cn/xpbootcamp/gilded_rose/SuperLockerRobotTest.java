@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.NoAvailableSpaceException;
 import cn.xpbootcamp.gilded_rose.model.Bag;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 import cn.xpbootcamp.gilded_rose.model.Ticket;
@@ -8,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SuperLockerRobotTest {
   //  1. Given super locker robot 2 lockers, locker No.1 with 20 total spaces and 18 available spaces,
@@ -87,6 +87,22 @@ public class SuperLockerRobotTest {
   //  1. Given super locker robot 2 lockers, locker No.1 with 20 total spaces and 0 available spaces,
   //  locker No.2 with 10 total spaces and 0 available spaces, When super locker robot deposit the bag,
   //  Then deposit failed and obtained "柜子已满".
+  @Test
+  void should_obtain_error_message_when_deposit_bag_given_2_lockers_both_without_available_spaces() {
+    // Given
+    Locker locker1 = new Locker(0, 1);
+    Locker locker2 = new Locker(0, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    SuperLockerRobot superLockerRobot = new SuperLockerRobot(lockers);
+    Bag bag = new Bag();
+
+    // Then
+    assertThrows(NoAvailableSpaceException.class, () -> {
+      superLockerRobot.depositBag(bag);
+    });
+  }
 
   //  1. Given super locker robot 2 lockers both with available space,
   //  1 valid ticket link to a bag deposited, When super locker robot claim the bag,
