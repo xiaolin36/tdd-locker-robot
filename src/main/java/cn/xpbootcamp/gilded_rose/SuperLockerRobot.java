@@ -11,8 +11,14 @@ public class SuperLockerRobot {
   private List<Locker> lockers;
 
   public SuperLockerRobot(List<Locker> lockers) {
-    this.lockers = lockers;
+    this.lockers = sortLockersByIndex(lockers);
   }
+
+  private List<Locker> sortLockersByIndex(List<Locker> lockers) {
+    lockers.sort(Comparator.comparingInt(Locker::getIndex));
+    return lockers;
+  }
+
 
   private Locker findDepositedLocker() {
     Locker lockerWithHigerRatioOfAvailableSpaces = this.lockers.get(0);
