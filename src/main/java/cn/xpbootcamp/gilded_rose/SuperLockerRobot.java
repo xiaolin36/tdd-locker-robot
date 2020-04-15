@@ -36,6 +36,19 @@ public class SuperLockerRobot {
   }
 
   public Bag claimBag(Ticket ticket) {
+    Locker locker = findClaimedLocker(ticket);
+    if (locker != null) {
+      return locker.claimBag(ticket);
+    }
+    return null;
+  }
+
+  private Locker findClaimedLocker(Ticket ticket) {
+    for(Locker locker: this.lockers) {
+      if (locker.getStoredBags().containsKey(ticket.getId())) {
+        return locker;
+      }
+    }
     return null;
   }
 }
