@@ -35,4 +35,7 @@ public class SuperLockerRobot {
     return locker.depositBag(bag);
   }
 
+  public Bag claimBag(Ticket ticket) {
+    return null;
+  }
 }

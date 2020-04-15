@@ -107,6 +107,26 @@ public class SuperLockerRobotTest {
   //  1. Given super locker robot 2 lockers both with available space,
   //  1 valid ticket link to a bag deposited, When super locker robot claim the bag,
   //  Then the deposited bag can be obtained.
+  @Test
+  void should_obtain_the_deposited_bag_when_claim_bag_given_2_lockers_and_1_valid_ticket() {
+    // Given
+    Locker locker1 = new Locker(2, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    SuperLockerRobot superLockerRobot = new SuperLockerRobot(lockers);
+
+    Bag bag = new Bag();
+    Ticket ticket = superLockerRobot.depositBag(bag);
+
+    // When
+    Bag depositedBag = superLockerRobot.claimBag(ticket);
+
+    // Then
+    assertNotNull(depositedBag);
+    assertEquals(bag, depositedBag);
+  }
 
 
   //  1. Given super locker robot 2 lockers both with available spaces,
