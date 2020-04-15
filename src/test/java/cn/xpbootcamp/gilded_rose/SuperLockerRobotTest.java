@@ -157,6 +157,22 @@ public class SuperLockerRobotTest {
   //  2. Given super locker robot 2 lockers both with available spaces,
   //  1 ticket not created in our system, When super locker robot claim the bag,
   //  Then obtained the bag failed and "票无效".
+  @Test
+  void should_obtain_error_message_when_claim_bag_given_2_lockers_and_1_ticket_not_created_in_our_system() {
+    // Given
+    Locker locker1 = new Locker(2, 1);
+    Locker locker2 = new Locker(2, 2);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    SuperLockerRobot superLockerRobot = new SuperLockerRobot(lockers);
 
+    Ticket ticket = new Ticket("invalid ticket");
+
+    // Then
+    assertThrows(InvalidTicketException.class, () -> {
+      superLockerRobot.claimBag(ticket);
+    });
+  }
 
 }

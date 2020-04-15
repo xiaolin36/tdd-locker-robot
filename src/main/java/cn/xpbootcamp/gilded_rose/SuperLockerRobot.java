@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.exception.InvalidTicketException;
 import cn.xpbootcamp.gilded_rose.model.Bag;
 import cn.xpbootcamp.gilded_rose.model.Locker;
 import cn.xpbootcamp.gilded_rose.model.Ticket;
@@ -18,7 +19,6 @@ public class SuperLockerRobot {
     lockers.sort(Comparator.comparingInt(Locker::getIndex));
     return lockers;
   }
-
 
   private Locker findDepositedLocker() {
     Locker lockerWithHigerRatioOfAvailableSpaces = this.lockers.get(0);
@@ -40,7 +40,7 @@ public class SuperLockerRobot {
     if (locker != null) {
       return locker.claimBag(ticket);
     }
-    return null;
+    throw new InvalidTicketException();
   }
 
   private Locker findClaimedLocker(Ticket ticket) {
