@@ -39,6 +39,26 @@ public class SuperLockerRobotTest {
   //  2. Given super locker robot 2 lockers, locker No.1 with 20 total spaces and 14 available spaces,
   //  locker No.2 with 10 total spaces and 8 available spaces, When super locker robot deposit the bag,
   //  Then obtained 1 ticket and the bag deposited to locker No.2.
+  @Test
+  void should_deposit_bag_to_No2_locker_when_deposit_bag_given_No2_locker_has_higher_ratio_of_available_spaces() {
+    // Given
+    Bag bag = new Bag();
+    Locker locker1 = new Locker(14, 1);
+    Locker locker2 = new Locker(8, 2);
+    locker1.setTotalSpaces(20);
+    locker2.setTotalSpaces(10);
+    List<Locker> lockers = new ArrayList<>();
+    lockers.add(locker1);
+    lockers.add(locker2);
+    SuperLockerRobot superLockerRobot = new SuperLockerRobot(lockers);
+
+    // When
+    Ticket ticket = superLockerRobot.depositBag(bag);
+
+    // Then
+    assertNotNull(ticket);
+    assertEquals(bag, locker2.claimBag(ticket));
+  }
 
   //  3. Given super locker robot 2 lockers, locker No.1 with 20 total spaces and 18 available spaces,
   //  locker No.2 with 10 total spaces and 9 available spaces, When super locker robot deposit the bag,
