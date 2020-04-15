@@ -14,8 +14,19 @@ public class SuperLockerRobot {
     this.lockers = lockers;
   }
 
+  private Locker findDepositedLocker() {
+    Locker lockerWithHigerRatioOfAvailableSpaces = this.lockers.get(0);
+    for(Locker currentLocker: this.lockers) {
+      if (currentLocker.getRatioOfAvailableSpaces() > lockerWithHigerRatioOfAvailableSpaces.getRatioOfAvailableSpaces()) {
+        lockerWithHigerRatioOfAvailableSpaces = currentLocker;
+      }
+    }
+    return lockerWithHigerRatioOfAvailableSpaces;
+  }
+
   public Ticket depositBag(Bag bag) {
-    Locker locker = this.lockers.get(0);
+    Locker locker = findDepositedLocker();
     return locker.depositBag(bag);
   }
+
 }
