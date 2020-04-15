@@ -49,4 +49,7 @@ public class Locker {
     }
     throw new InvalidTicketException();
   }
+
+  public void setTotalSpaces(int i) {
+  }
 }
